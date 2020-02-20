@@ -1,38 +1,55 @@
+@import '~antd/dist/antd.css';
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #ffffff;
+  /* min-height: 25vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.input-wrap {  
+  width: 50vw;
+  margin: 5vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.loading-wrap {
+  margin: 5vh;
+}
+
+.title-wrap {
+  color: black;
+  font-size: 1rem;
+  margin: 5vh;
+}
+
+.recipes {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  position: relative;
+}
+
+html{ /*mobile*/
+  font-size:24px;
+}
+
+@media only screen and (min-width: 600px){
+  html { /*tablet*/
+      font-size:28px;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media only screen and (min-width: 768px){
+  html { /*desktop*/
+      font-size:32px;
   }
 }
