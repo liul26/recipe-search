@@ -32,6 +32,12 @@
   margin: 5vh;
 }
 
+.text-wrap {
+  color: #727272;
+  font-size: 0.25rem;
+  margin: 2.5vh;
+}
+
 .recipe {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -40,21 +46,30 @@
   position: relative;
 }
 
-.recipesResults {
+.body {
   height:calc(100vh-3.5rem);
-  overflow: auto;
+  width: 100%;
+  overflow: visible;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   flex-direction: column;
   justify-content: center;
   padding-top: 0.5rem;
 }
 
+.results {
+  display: flex;
+  /* overflow: visible; */
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
 .image-wrap {
   /* object-fit: cover; */
-  width: 50%;
+  width: 25%;
   justify-content: center;
   /* align-items: center; */
+  /* position: absolute; */
   align-self: center;
 }
 

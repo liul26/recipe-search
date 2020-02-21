@@ -27,13 +27,12 @@ function App() {
     console.log(url)
     const r = await fetch(url)
     const body = await r.json()
-    setRecipes(body.data)
+    setRecipes(body.hits)
+    console.log(body)
     setSearchterm('')
     setLoading(false)
     console.log(recipes)
   }
-
-
 
     return (
       <div className="App">
@@ -50,23 +49,27 @@ function App() {
               onSearch={value => console.log(value)}
             />
           </div>
+          {/* <div className="text-wrap">Recipes with </div> */}
         </header>
 
-        <div className="recipesResults">
-          {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
-          <div className="loading-wrap">
-            { <Spin /> } 
-            {/* loading &&  */}
+        <div className="body">
+          <div className="results">
+            {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
           </div>
-          <img src={Sandwich} alt="a sandwich" className="image-wrap"/> {/*if data showing, hide sandwich. no data. show sandwich*/}
+          <div className="loading-wrap">
+            { loading && <Spin /> } 
+          </div>
+          <div className="image-wrap">
+            <img src={Sandwich} alt="a sandwich"/> {/*if data showing, hide sandwich. no data. show sandwich*/}
+          </div>
         </div>
       </div>
     );
 }
 
 function Recipe(props){
-  const imageurl = props.hits.recipe.image
-  const label = props.hits.recipe.label
+  const imageurl = props.recipe.image //props accounts for recipe.hits already
+  const label = props.recipe.label
   return (
     <div className="recipe" onClick={()=>window.open(imageurl, '_blank')}>
      {/* images.fixed_height. <-- also ok to take out below */}
