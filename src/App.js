@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
+import Sandwich from './Sandwich.PNG';
 import { Input } from 'antd';
 import { Spin } from 'antd';
-import Sandwich from './Sandwich.PNG';
+import { Card } from 'antd';
 
+const { Meta } = Card;
 const { Search } = Input;
 
 function App() {
@@ -54,7 +56,15 @@ function App() {
 
         <div className="body">
           <div className="results">
+            {/* {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)} */}
             {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
+            {/* <Card
+              hoverable
+              style={{ width: 240 }}
+              cover={<img alt="example" src= {Sandwich} />}
+            >
+              <Meta title="Recipe name here" description="From WebsiteName *Test card*" />
+            </Card> */}
           </div>
           <div className="loading-wrap">
             { loading && <Spin /> } 
@@ -69,12 +79,20 @@ function App() {
 
 function Recipe(props){
   const imageurl = props.recipe.image //props accounts for recipe.hits already
+  const source = props.recipe.url
   const label = props.recipe.label
   return (
-    <div className="recipe" onClick={()=>window.open(imageurl, '_blank')}>
+    <div className="recipe" onClick={()=>window.open(source, '_blank')}>
      {/* images.fixed_height. <-- also ok to take out below */}
-    <img src={imageurl} alt="recipe" />
-    <div className="recipe-title">{label}</div>
+      <Card
+          hoverable
+          style={{ width: 240 }}
+          cover={<img alt="recipe photo" src= {imageurl} />}
+        >
+          <Meta title={label} description="From WebsiteName *Test card*" />
+      </Card>
+    {/* <img src={imageurl} alt="recipe" /> */}
+    {/* <div className="recipe-title">{label}</div> */}
   </div>)
 }
 

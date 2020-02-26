@@ -58,10 +58,12 @@
 }
 
 .results {
+  /* height:calc(100vh-3.5rem); */
+  overflow: auto;
   display: flex;
-  /* overflow: visible; */
-  margin-left: 5vw;
-  margin-right: 5vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 0.5rem;
 }
 
 .image-wrap {
