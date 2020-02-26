@@ -50,6 +50,7 @@ function App() {
               onKeyPress={e=> {if(e.key==='Enter') getRecipes()}}
               onSearch={value => console.log(value)}
             />
+            {/* <div>Your results for {searchterm}</div> !! Next task: show previously searched term*/}
           </div>
           {/* <div className="text-wrap">Recipes with </div> */}
         </header>
