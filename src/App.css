@@ -2,10 +2,11 @@
 
 .App {
   text-align: center;
+  background-image: url("backgroundimage24.png");
 }
 
 .App-header {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   /* min-height: 25vh; */
   display: flex;
   flex-direction: column;
@@ -21,7 +22,7 @@
 }
 
 .loading-wrap {
-  margin: 5vh;
+  margin-bottom: 5vh;
   display:flex;
   justify-content: center;
 }
@@ -34,8 +35,15 @@
 
 .text-wrap {
   color: #727272;
-  font-size: 0.25rem;
+  font-size: 0.5rem;
   margin: 2.5vh;
+}
+
+.text-searchedfor {
+  color: #242424;
+  font-size: 0.75rem;
+  margin: 2.5vh;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .recipe {

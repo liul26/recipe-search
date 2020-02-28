@@ -12,13 +12,15 @@ function App() {
   const [searchterm, setSearchterm] = useState('')
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
-  
+  // var prevsearch = ('')
+  const [prevsearch, setprevSearch] = useState('')
+
   async function getRecipes(){
     setLoading(true)
     const appid = '3a01060f'
     const key='f79f9e9d2be96257577b0db96561c181'
     const from = 0
-    const to = 5
+    const to = 10
     let url = 'https://api.edamam.com/search?'
     url += 'q=' + searchterm
     url += '&app_id=' + appid
@@ -31,6 +33,8 @@ function App() {
     const body = await r.json()
     setRecipes(body.hits)
     console.log(body)
+    setprevSearch(searchterm)
+    console.log(prevsearch)
     setSearchterm('')
     setLoading(false)
     console.log(recipes)
@@ -56,22 +60,22 @@ function App() {
         </header>
 
         <div className="body">
-          <div className="results">
-            {/* {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)} */}
-            {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
-            {/* <Card
-              hoverable
-              style={{ width: 240 }}
-              cover={<img alt="example" src= {Sandwich} />}
-            >
-              <Meta title="Recipe name here" description="From WebsiteName *Test card*" />
-            </Card> */}
-          </div>
           <div className="loading-wrap">
             { loading && <Spin /> } 
           </div>
+          <div className="text-wrap">
+            You searched for: {prevsearch}
+            {console.log(prevsearch)}
+          </div>
+          <div className="results">
+            {/* {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)} */}
+            {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
+          </div>
           <div className="image-wrap">
             <img src={Sandwich} alt="a sandwich"/> {/*if data showing, hide sandwich. no data. show sandwich*/}
+          </div>
+          <div className="text-wrap">
+            Made with love by Leanne Liu in React | Copyright 2020
           </div>
         </div>
       </div>
@@ -82,15 +86,16 @@ function Recipe(props){
   const imageurl = props.recipe.image //props accounts for recipe.hits already
   const source = props.recipe.url
   const label = props.recipe.label
+  const webname = props.recipe.source
   return (
     <div className="recipe" onClick={()=>window.open(source, '_blank')}>
      {/* images.fixed_height. <-- also ok to take out below */}
       <Card
           hoverable
-          style={{ width: 240 }}
+          style={{ width: 300 }}
           cover={<img alt="recipe photo" src= {imageurl} />}
         >
-          <Meta title={label} description="From WebsiteName *Test card*" />
+          <Meta title={label} description={webname} />
       </Card>
     {/* <img src={imageurl} alt="recipe" /> */}
     {/* <div className="recipe-title">{label}</div> */}
