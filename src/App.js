@@ -64,7 +64,7 @@ function App() {
             { loading && <Spin /> } 
           </div>
           <div className="text-wrap">
-            You searched for: {prevsearch}
+            You searched for: <div style={{fontWeight: 'bold'}}>{prevsearch}</div>
             {console.log(prevsearch)}
           </div>
           <div className="results">
