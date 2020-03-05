@@ -15,6 +15,15 @@ function App() {
   // var prevsearch = ('')
   const [prevsearch, setprevSearch] = useState('')
 
+  // if (recipes===[]) {
+  //   return (
+  //     <div className="text-wrap">
+  //       No recipes were found for: <div style={{fontWeight: 'bold'}}>{prevsearch}</div>
+  //       {console.log(prevsearch)}
+  //     </div>
+  //   )
+  // }
+
   async function getRecipes(){
     setLoading(true)
     const appid = '3a01060f'
@@ -54,9 +63,7 @@ function App() {
               onKeyPress={e=> {if(e.key==='Enter') getRecipes()}}
               onSearch={value => console.log(value)}
             />
-            {/* <div>Your results for {searchterm}</div> !! Next task: show previously searched term*/}
           </div>
-          {/* <div className="text-wrap">Recipes with </div> */}
         </header>
 
         <div className="body">
@@ -68,7 +75,6 @@ function App() {
             {console.log(prevsearch)}
           </div>
           <div className="results">
-            {/* {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)} */}
             {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
           </div>
           <div className="image-wrap">
@@ -81,6 +87,22 @@ function App() {
       </div>
     );
 }
+
+//***CHECK WITH TA FOR HELP */
+// function exist(props){
+//   const results = props.recipe
+  
+//   var rexist = true
+//   if (!results) {
+//     rexist = false
+//     return (
+//       <div className="text-wrap">
+//         No recipes were found for: <div style={{fontWeight: 'bold'}}>{prevsearch}</div>
+//         {console.log(prevsearch)}
+//       </div>
+//     )
+//   }
+// }
 
 function Recipe(props){
   const imageurl = props.recipe.image //props accounts for recipe.hits already
@@ -97,8 +119,6 @@ function Recipe(props){
         >
           <Meta title={label} description={webname} />
       </Card>
-    {/* <img src={imageurl} alt="recipe" /> */}
-    {/* <div className="recipe-title">{label}</div> */}
   </div>)
 }
 
