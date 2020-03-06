@@ -4,7 +4,8 @@ import Sandwich from './Sandwich.PNG';
 import { Input } from 'antd';
 import { Spin } from 'antd';
 import { Card } from 'antd';
-
+import { StarOutlined } from '@ant-design/icons';
+import { Button, Tooltip } from 'antd';
 const { Meta } = Card;
 const { Search } = Input;
 
@@ -12,17 +13,8 @@ function App() {
   const [searchterm, setSearchterm] = useState('')
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
-  // var prevsearch = ('')
   const [prevsearch, setprevSearch] = useState('')
-
-  // if (recipes===[]) {
-  //   return (
-  //     <div className="text-wrap">
-  //       No recipes were found for: <div style={{fontWeight: 'bold'}}>{prevsearch}</div>
-  //       {console.log(prevsearch)}
-  //     </div>
-  //   )
-  // }
+  const [init, setInit] = useState(false)
 
   async function getRecipes(){
     setLoading(true)
@@ -47,12 +39,17 @@ function App() {
     setSearchterm('')
     setLoading(false)
     console.log(recipes)
+    setInit(true)
+
   }
 
     return (
       <div className="App">
         <header className="App-header">
           <div className="title-wrap">Recipe Search</div>
+          <Tooltip title="search">
+            <Button type="primary" shape="circle" icon={<StarOutlined />} />
+          </Tooltip>
           <div className="input-wrap">
             <Search
               placeholder="Add your ingredients here..."
@@ -70,13 +67,15 @@ function App() {
           <div className="loading-wrap">
             { loading && <Spin /> } 
           </div>
-          <div className="text-wrap">
+          {init && <div className="text-wrap">
             You searched for: <div style={{fontWeight: 'bold'}}>{prevsearch}</div>
             {console.log(prevsearch)}
-          </div>
+          </div>}
+          {!init && <div className="text-wrap">Start searching!</div>}
           <div className="results">
             {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
           </div>
+          {recipes.length===0 && init && <div className="text-wrap">Couldn't find any recipes...check your spelling and try again.</div>}
           <div className="image-wrap">
             <img src={Sandwich} alt="a sandwich"/> {/*if data showing, hide sandwich. no data. show sandwich*/}
           </div>
@@ -87,22 +86,6 @@ function App() {
       </div>
     );
 }
-
-//***CHECK WITH TA FOR HELP */
-// function exist(props){
-//   const results = props.recipe
-  
-//   var rexist = true
-//   if (!results) {
-//     rexist = false
-//     return (
-//       <div className="text-wrap">
-//         No recipes were found for: <div style={{fontWeight: 'bold'}}>{prevsearch}</div>
-//         {console.log(prevsearch)}
-//       </div>
-//     )
-//   }
-// }
 
 function Recipe(props){
   const imageurl = props.recipe.image //props accounts for recipe.hits already
