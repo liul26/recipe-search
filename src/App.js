@@ -15,6 +15,15 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [prevsearch, setprevSearch] = useState('')
   const [init, setInit] = useState(false)
+  const [myfaves, setMyFaves] = useState([])
+
+  function getFaved () {
+    let faves = []
+    if (localStorage && localStorage.getItem('faved')) {
+      faves = JSON.parse(localStorage.getItem('faved'))
+    }
+    setMyFaves(faves)
+  }
 
   async function getRecipes(){
     setLoading(true)
@@ -40,16 +49,12 @@ function App() {
     setLoading(false)
     console.log(recipes)
     setInit(true)
-
   }
 
     return (
       <div className="App">
         <header className="App-header">
           <div className="title-wrap">Recipe Search</div>
-          <Tooltip title="search">
-            <Button type="primary" shape="circle" icon={<StarOutlined />} />
-          </Tooltip>
           <div className="input-wrap">
             <Search
               placeholder="Add your ingredients here..."
@@ -61,6 +66,14 @@ function App() {
               onSearch={value => console.log(value)}
             />
           </div>
+          <div className="loading-wrap">
+            <Tooltip title="favorite">
+                <Button type="primary" onClick={getFaved}>
+                  See favorite recipes
+                </Button>
+            </Tooltip>
+          </div>
+        
         </header>
 
         <div className="body">
@@ -72,6 +85,9 @@ function App() {
             {console.log(prevsearch)}
           </div>}
           {!init && <div className="text-wrap">Start searching!</div>}
+          <div className="results">
+            {myfaves.map((recipe, i)=> {console.log(recipe); return <Recipe key={`favorite-${i}`} recipe={recipe} />})}
+          </div>
           <div className="results">
             {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
           </div>
@@ -88,19 +104,46 @@ function App() {
 }
 
 function Recipe(props){
+  console.log(props)
   const imageurl = props.recipe.image //props accounts for recipe.hits already
   const source = props.recipe.url
   const label = props.recipe.label
   const webname = props.recipe.source
+
+  //have a function that saves faves to localstorage
+  function favorite() {
+    let favoriteRecipes = []
+    if (localStorage && localStorage.getItem('faved')) {
+      favoriteRecipes = JSON.parse(localStorage.getItem('faved'))
+    }
+    let existing=favoriteRecipes.filter(x=>x.url===props.recipe.url)
+    if (existing.length <= 0) {
+      favoriteRecipes.push(props.recipe)
+    } else {
+      let index = favoriteRecipes.findIndex(x=>x.url===props.recipe.url)
+      favoriteRecipes.splice(index, 1)
+    }
+    localStorage.setItem('faved', JSON.stringify(favoriteRecipes))
+  }
+
+// onClick={()=>window.open(source, '_blank')}
   return (
-    <div className="recipe" onClick={()=>window.open(source, '_blank')}>
+    <div className="recipe">
      {/* images.fixed_height. <-- also ok to take out below */}
       <Card
           hoverable
           style={{ width: 300 }}
           cover={<img alt="recipe photo" src= {imageurl} />}
-        >
-          <Meta title={label} description={webname} />
+      >
+      <Meta title={label} description={webname} />
+      <Tooltip title="Favorite this recipe">
+        <Button 
+          // shape="circle" 
+          icon={<StarOutlined />} 
+          onClick={favorite} 
+          style={{ marginTop: 20 }}
+        >Add to favorites</Button>
+      </Tooltip>
       </Card>
   </div>)
 }

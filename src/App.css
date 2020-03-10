@@ -62,7 +62,7 @@
   /* flex-wrap: wrap; */
   flex-direction: column;
   justify-content: center;
-  padding-top: 0.5rem;
+  /* padding-top: 0.5rem; */
 }
 
 .results {
@@ -71,7 +71,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 0.5rem;
+  /* padding-top: 0.5rem; */
 }
 
 .image-wrap {
