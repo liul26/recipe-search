@@ -66,11 +66,9 @@ function App() {
               onSearch={value => console.log(value)}
             />
           </div>
-          <div className="loading-wrap">
+          <div>
             <Tooltip title="favorite">
-                <Button type="primary" onClick={getFaved}>
-                  See favorite recipes
-                </Button>
+                <Button type="primary" onClick={getFaved}>Show favorite recipes</Button>
             </Tooltip>
           </div>
         
@@ -85,8 +83,8 @@ function App() {
             {console.log(prevsearch)}
           </div>}
           {!init && <div className="text-wrap">Start searching!</div>}
-          <div className="results">
-            {myfaves.map((recipe, i)=> {console.log(recipe); return <Recipe key={`favorite-${i}`} recipe={recipe} />})}
+          <div className="favorites">
+            {myfaves.map((recipe, i)=> {console.log(recipe); return <Recipe key={`favorite-${i}`} recipe={recipe}/>})}
           </div>
           <div className="results">
             {recipes.map((recipe, i)=> <Recipe key={i} {...recipe} />)}
@@ -126,7 +124,6 @@ function Recipe(props){
     localStorage.setItem('faved', JSON.stringify(favoriteRecipes))
   }
 
-// onClick={()=>window.open(source, '_blank')}
   return (
     <div className="recipe">
      {/* images.fixed_height. <-- also ok to take out below */}
@@ -134,11 +131,11 @@ function Recipe(props){
           hoverable
           style={{ width: 300 }}
           cover={<img alt="recipe photo" src= {imageurl} />}
+          onClick={()=>window.open(source, '_blank')}
       >
       <Meta title={label} description={webname} />
       <Tooltip title="Favorite this recipe">
         <Button 
-          // shape="circle" 
           icon={<StarOutlined />} 
           onClick={favorite} 
           style={{ marginTop: 20 }}

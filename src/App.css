@@ -22,9 +22,10 @@
 }
 
 .loading-wrap {
-  margin-bottom: 5vh;
+  /* margin-bottom: 5vh; */
   display:flex;
   justify-content: center;
+  padding-top: 2vh;
 }
 
 .title-wrap {
@@ -47,9 +48,11 @@
 }
 
 .recipe {
-  margin-left: 0.25rem;
+  /* margin-left: 0.25rem;
   margin-right: 0.25rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem; */
+  margin: 0.25rem;
   cursor: pointer;
   position: relative;
 }
@@ -63,6 +66,14 @@
   flex-direction: column;
   justify-content: center;
   /* padding-top: 0.5rem; */
+}
+
+.favorites {
+  overflow:auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .results {
