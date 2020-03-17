@@ -62,13 +62,22 @@ function App() {
               size="large"
               value={searchterm} /*IMPORTANT*/
               onChange={e=> setSearchterm(e.target.value)} /*IMPORTANT*/
-              onKeyPress={e=> {if(e.key==='Enter') getRecipes()}}
+              // onKeyPress={e=> {if(e.key==='Enter') getRecipes()}}
               onSearch={value => console.log(value)}
+              // onClick={e=> getRecipes()}
+              onSearch={getRecipes}
+              //????^
             />
           </div>
           <div>
             <Tooltip title="favorite">
-                <Button type="primary" onClick={getFaved}>Show favorite recipes</Button>
+                <Button 
+                  type="primary" 
+                  onClick={getFaved}
+
+                >
+                  Show favorite recipes
+                </Button>
             </Tooltip>
           </div>
         
@@ -139,6 +148,8 @@ function Recipe(props){
           icon={<StarOutlined />} 
           onClick={favorite} 
           style={{ marginTop: 20 }}
+          onClick={e=>e.stopPropagation()}
+          //???^^^
         >Add to favorites</Button>
       </Tooltip>
       </Card>
